@@ -28,36 +28,72 @@ $(function(){
     var cities=[
         {name:'Paris',
          country:'fr',
-         destinations: ['Kyiv', 'Marseille']
+         destinations: [{name:'Kyiv', price:200},
+                        {name:'Marseille', price:20}
+                       ]
         },
         {name:'Marseille',
          country:'fr',
-         destinations:['Paris','Lviv']
+         destinations:[{name:'Paris', price:10},
+                       {name:'Lviv', price:10}
+                      ]
         },
         {name:'Lyon',
          country:'fr',
-         destinations:['Berlin','Dresden', 'Florence']},
+         destinations:[{name:'Berlin', price:10},
+                       {name:'Dresden', price:10}, {name:'Florence', price:10}
+                      ]
+        },
         {name:'Lviv',
          country:'ua',
-         destinations:['Verona','Paris', 'Berlin','Kyiv']},
+         destinations:[{name:'Verona', price:10},
+                       {name:'Paris', price:10},
+                       {name:'Berlin', price:10},
+                       {name:'Kyiv', price:10}
+                      ]
+        },
         {name:'Kyiv',
          country:'ua',
-         destinations:['Paris','Marseille','Lviv']},
+         destinations:[{name:'Paris', price:10},
+                       {name:'Marseille', price:10},
+                       {name:'Lviv', price:10}
+                      ]
+        },
         {name:'Roma',
          country:'it',
-         destinations:['Lyon','Berlin','Paris','Lviv']},
+         destinations:[{name:'Lyon', price:10},
+                       {name:'Berlin', price:10},
+                       {name:'Paris', price:10},
+                       {name:'Lviv', price:10}
+                      ]
+        },
         {name:'Florence',
          country:'it',
-         destinations:['Roma','Berlin','Paris']},
+         destinations:[{name:'Roma', price:10},
+                       {name:'Berlin', price:10},
+                       {name:'Paris', price:10}
+                      ]
+        },
         {name:'Verona',
          country:'it',
-         destinations:['Dresden','Kyiv','Roma']},
+         destinations:[{name:'Dresden', price:10},
+                       {name:'Kyiv', price:10},
+                       {name:'Roma', price:10}
+                      ]
+        },
         {name:'Berlin',
          country:'de',
-         destinations:['Paris','Lviv','Roma']},
+         destinations:[{name:'Paris', price:10},
+                       {name:'Lviv', price:10},
+                       {name:'Roma', price:10}
+                      ]
+        },
         {name:'Dresden',
          country:'de',
-         destinations:['Berlin','Verona']}
+         destinations:[{name:'Berlin', price:10},
+                       {name:'Verona', price:10}
+                      ]
+        }
     ];
 
 
@@ -108,15 +144,17 @@ $(function(){
         $(".navbar").hide();
         $("#go").hide();
 
-        var home=$(this).html();
-        var city=searchCityByName(home);
-        var destination_names = city.destinations;
-        var destinations = [];
-        for(var i=0; i < destination_names.length; i++){
-            var dest_name = destination_names[i];
-            destinations.push(searchCityByName(dest_name))
+        var home = $(this).html();
+        var cityFrom = searchCityByName(home);
+        var destinations = cityFrom.destinations;
+        var result = [];
+        for(var i=0; i < destinations.length; i++){
+            var dest = destinations[i];
+            var cityTo = searchCityByName(dest.name);
+            cityTo.price = dest.price;
+            result.push(cityTo);
         }
-        var context={home:home, destinations:destinations};
+        var context={home:home, destinations:result};
         var rendered_template=from_template(context);
         $('#from').html(rendered_template);
         $(".from").click(handleClickOnFromELements);
