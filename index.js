@@ -146,15 +146,8 @@ $(function(){
 
         var home = $(this).html();
         var cityFrom = searchCityByName(home);
-        var destinations = cityFrom.destinations;
-        var result = [];
-        for(var i=0; i < destinations.length; i++){
-            var dest = destinations[i];
-            var cityTo = searchCityByName(dest.name);
-            cityTo.price = dest.price;
-            result.push(cityTo);
-        }
-        var context={home:home, destinations:result};
+        var context={home:home,
+                     destinations:cityFrom.destinations};
         var rendered_template=from_template(context);
         $('#from').html(rendered_template);
         $(".from").click(handleClickOnFromELements);
