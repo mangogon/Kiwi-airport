@@ -1,0 +1,79 @@
+<!Doctype html>
+<html lang="en">
+
+    <head>
+        <title>Kiwi-com</title>
+        <meta charset ="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href='css/bootstrap.min.css'/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="form-group">
+                    <select class="form-control" id="choose" multiple>
+                        <option value="fr">France</option>
+                        <option value="ua">Ukraine</option>
+                        <option value="de">Germany</option>
+                        <option value="it">Italy</option>
+                    </select>
+
+                    <button type="button" class="search-btn btn btn-primary" id='country'>Search</button>
+                </div>
+            </nav>
+
+            <div id="go"></div>
+
+            <div id='from'></div>
+        </div>
+
+        <script id="go-template" type="text/x-handlebars-template">
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each result}}
+                    <tr>
+                        <td>{{country_name}}</td>
+                        <td><a href="#"><i class='from'>{{name}}</i></a></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </script>
+
+        <script id='from-template' type="text/x-handlebars-template">
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each destinations}}
+                    <tr>
+                        <td>{{../home}}</td>
+                        <td><a href="#"><i class='from'>{{name}}</i></a></td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </script>
+
+        <script src="handlebars-v4.0.5.js"></script>
+        <script src="parse.min.js"></script>
+        <script src="jquery-3.2.0.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script src="index.js"></script>
+
+    </body>
+</html>
