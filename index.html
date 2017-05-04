@@ -29,46 +29,95 @@
             <div id="go"></div>
 
             <div id='from'></div>
+
+            <div id='connection'></div>
         </div>
 
         <script id="go-template" type="text/x-handlebars-template">
-            <table class="table table-stripped">
-                <thead>
-                    <tr>
-                        <th>Country</th>
-                        <th>City</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each result}}
-                    <tr>
-                        <td>{{country_name}}</td>
-                        <td><a href="#"><i class='from'>{{name}}</i></a></td>
-                    </tr>
-                    {{/each}}
-                </tbody>
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>City</th>
+            </tr>
+            </thead>
+    <tbody>
+        {{#each result}}
+        <tr>
+            <td>{{country_name}}</td>
+            <td><a href="#"><i class='from'>{{name}}</i></a></td>
+            </tr>
+        {{/each}}
+            </tbody>
             </table>
         </script>
 
         <script id='from-template' type="text/x-handlebars-template">
-            <table class="table table-stripped">
-                <thead>
-                    <tr>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each destinations}}
-                    <tr>
-                        <td>{{../home}}</td>
-                        <td><a href="#"><i class='from'>{{name}}</i></a></td>
-                        <td>{{price}} $</td>
-                        </tr>
-                    {{/each}}
-                </tbody>
+
+<h1><i>Here</i> are the direct flights from {{home}}</h1>
+
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Price</th>
+            </tr>
+            </thead>
+    <tbody>
+        {{#each destinations}}
+        <tr>
+            <td>{{../home}}</td>
+            <td><a href="#"><i class='from'>{{name}}</i></a></td>
+            <td>{{price}} $</td>
+            </tr>
+        {{/each}}
+            </tbody>
             </table>
+
+<h1>Look for flight with a <i>connection</i> from {{home}}</h1>
+
+<div>
+    <select id="destination-select">
+        {{#each cities}}
+        <option>{{name}}</option>
+        {{/each}}
+            </select>
+            </div>
+
+<button type="button" class="search-btn btn btn-primary" id='search' value="{{home}}">Search</button>
+
+        </script>
+
+        <script id='connection-template' type="text/x-handlebars-template">
+
+            <p><h2><b>For to get {{dest }}</b> from <b>{{home}}</b> you can choose one of the next aeroports:</h2><p/>
+
+
+{{#if nb}}
+
+<p>{{nb}} routes found:</p>
+
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th style="width:16px"></th>
+                    <th>Route</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+    {{#each result}}
+        <tr>
+            <td>{{inc @index}}</td>
+            <td>{{../home}} --> {{name}} --> {{../dest}}</td>
+            <td>${{price}}</td>
+
+            </tr>
+    {{/each}}
+            </table>
+{{else}}
+<p>Sorry, I couldn't find any routes...</p>
+{{/if}}
         </script>
 
         <script src="handlebars-v4.0.5.js"></script>
