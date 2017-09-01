@@ -6,7 +6,7 @@ $(function(){
      */
 
     // A country has a code and a name
-    var countries=[
+    /*var countries=[
         {code:'fr',
          name:'France'},
         {code:'ua',
@@ -16,6 +16,7 @@ $(function(){
         {code:'it',
          name:'Italy'}
     ];
+    */
 
     var countries2 = {
         fr: 'France',
@@ -83,9 +84,9 @@ $(function(){
         },
         {name:'Berlin',
          country:'de',
-         destinations:[{name:'Paris', price:10},
-                       {name:'Lviv', price:10},
-                       {name:'Roma', price:10}
+         destinations:[{name:'Paris', price:50},
+                       {name:'Lviv', price:100},
+                       {name:'Roma', price:60}
                       ]
         },
         {name:'Dresden',
@@ -170,8 +171,6 @@ $(function(){
 
             var home = $(this).val();
             var dest = $('#destination-select').val();
-            //var price = function getTotal()
-            //var total=findConnectionsBetween()
 
             var result= findConnectionsBetween(home, dest);
             // The result is a list of objects {name:..., price:...}
@@ -180,24 +179,22 @@ $(function(){
             var rendered_template=connection_template(context);
             $('#connection').html(rendered_template);
         })
-
     }
-
 
     /*
      * Other utility functions
      */
 
     // Lookup a country by name -> a country or an empty object
-    function searchCountryByName(name){
+    /*function searchCountryByName(name){
         for(var i=0; i < countries.length; i++){
             var country = countries[i];
             if(country.name == name)
                 return country;
         }
         return{};
-
     }
+    */
 
     // Lookup a city by name -> a city or an empty object
     function searchCityByName(name){
@@ -222,7 +219,7 @@ $(function(){
     };
 
 
-    function findCitiesGoingTo (destName) {
+    /*function findCitiesGoingTo (destName) {
         var destCity = searchCityByName(destName);
         var result=[];
         for (var i=0; i < cities.length; i++) {
@@ -232,10 +229,10 @@ $(function(){
                 if (d.name==destName)
                     result.push(city);
             }
-
         }
         return result;
     }
+    */
 
 
     function findConnectionsBetween (a, b) {
@@ -247,26 +244,18 @@ $(function(){
             var d1= homeCity.destinations[i];
             //console.debug('Looking for connections from', d1.name);
             var c=searchCityByName(d1.name);
-
-
-            //var f1=searchCityByName(d1.price);
-
-
+            
             //console.debug('Now we are in', c.name);
             //console.debug('From there we can go to:');
             for(var j=0; j<c.destinations.length; j++) {
                 var d2 = c.destinations[j];
-
-                //var f2=d2.price;
-                //var total= f1+f2;
-                //total.push(c);
 
                 //console.debug('- ', d2.name);
                 if(d2.name== b) {
                     //console.debug('This is good!');
                     var total_price = d1.price + d2.price;
                     result.push({name:c.name, price: total_price});
-                    break;
+                    //break;
                 }
                 else {
                     //console.debug('Naaah...');
@@ -279,23 +268,8 @@ $(function(){
         return result;
     };
 
-    /*function getTotal(a,b){
-        var homeCity = searchCityByName(a);
-        var result=[];
-        for (var i=0; i < homeCity.destinations.length; i++) {
-            var d1= homeCity.destinations[i];
-            var c=searchCityByName(d1.price);
-            for(var j=0; j<c.destinations.length; j++) {
-                var d2 = c.destinations[j];
-    }
-        }
-        console.log()
-    }
-    */
-
-    // Test code
-
     /*
+    Test code
     findConnectionsBetween('Berlin', 'Paris');
     */
 

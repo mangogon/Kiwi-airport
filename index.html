@@ -54,7 +54,7 @@
 
         <script id='from-template' type="text/x-handlebars-template">
 
-<h1><i>Here</i> are the direct flights from {{home}}</h1>
+<h2>Here are the direct flights from {{home}}</h2>
 
 <table class="table table-stripped">
     <thead>
@@ -75,7 +75,7 @@
             </tbody>
             </table>
 
-<h1>Look for flight with a <i>connection</i> from {{home}}</h1>
+<h2>Look for flight with a connection from {{home}}</h2>
 
 <div>
     <select id="destination-select">
@@ -91,7 +91,8 @@
 
         <script id='connection-template' type="text/x-handlebars-template">
 
-            <p><h2><b>For to get {{dest }}</b> from <b>{{home}}</b> you can choose one of the next aeroports:</h2><p/>
+
+            <p><h2>For to get {{dest }} from {{home}} you can choose one of the next aeroports:</h2><p/>
 
 
 {{#if nb}}
